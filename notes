@@ -1,0 +1,50 @@
+//bootstrap
+import 'bootstrap';
+
+//axios for xml request
+import axios from 'axios';
+
+//file system
+import fs from 'fs';
+
+//import xml2json from 'xml2json';
+
+//xml file reader
+import XMLParser from 'react-xml-parser';
+
+
+//use fs to read file and load into variable called xml
+var xml = require('fs').readFileSync('./tickets.xml', 'utf8');
+
+
+
+
+
+var parseString = require('xml2js').parseString;
+var xml = ""
+parseString(xml, function (err, result) {
+    console.dir(result);
+});
+
+
+//produces unreachable code warning (unable to see xml in console)
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      App(this);
+    }
+  };
+  xmlhttp.open("GET", "/tickets.xml", true);
+  xmlhttp.send();
+
+
+
+//webkit fs error (cannot run fs client side?)
+var convert = require('xml-js');
+var xml = require('fs').readFileSync('/tickets.xml', 'utf8');
+var options = {ignoreComment: true, alwaysChildren: true};
+var result = convert.xml2js(xml, options); // or convert.xml2json(xml, options)
+console.log(result);
+
+var result = convert.xml2json(xml, {compact: true, spaces: 4});
+console.log(result);
